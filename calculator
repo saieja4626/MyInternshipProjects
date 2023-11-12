@@ -1,0 +1,38 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+//        System.out.println("Hello world!");
+        System.out.println("enter two numbers");
+        Scanner sc=new Scanner(System.in);
+        int a=sc.nextInt();
+        int b=sc.nextInt();
+        calculator(a,b);
+    }
+    public static void calculator(int x, int y) {
+
+Scanner raj=new Scanner(System.in);
+     System.out.println("enter the operation you want to perform enter the option 1->addition, 2-> subtraction, 3->division, 4->multiplication:\"");
+        int ch = raj.nextInt();
+        // System.out.println(");
+        switch (ch) {
+            case 1:
+                System.out.println("the operation is:" + (x + y));
+                break;
+            case 2:
+                System.out.println("the operation is subtraction:" + (x - y));
+                break;
+            case 3:
+                System.out.println("the operation is division:" + (int) x / y);
+                break;
+
+            case 4:
+                System.out.println("the operation is multiplication :" + (x * y));
+                break;
+            default:
+                System.out.println("Invalid");
+
+
+        }
+    }
+}
