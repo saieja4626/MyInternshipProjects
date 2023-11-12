@@ -1,0 +1,35 @@
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+         System.out.println("guess the number in range of 1000");
+        Scanner sc = new Scanner(System.in);
+        int guess = sc.nextInt();
+        int randomNumber=random();
+        System.out.println("the random number is "+randomNumber);
+        int count=0;
+        if(guess==randomNumber){
+            count+=1;
+            System.out.println("the number is correct");
+        }
+        if(count>1) {
+            System.out.println(count);
+        }
+        if(guess<randomNumber){
+                System.out.println("your guess number is too low");
+            }
+        if(guess>randomNumber){
+            System.out.println("your guess number is too high");
+
+            }
+        }
+
+
+    public static int random(){
+        Random ram= new Random();
+        int rand = ram.nextInt(1000);
+        System.out.println(rand);
+
+        return rand;
+    }
+
+}
