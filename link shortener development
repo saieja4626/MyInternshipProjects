@@ -1,0 +1,77 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class LinkShortener {
+
+    private static final String BASE62_CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    private static final int SHORT_LINK_LENGTH = 6;
+
+    private Map<String, String> urlMappings;
+
+    public LinkShortener() {
+        this.urlMappings = new HashMap<>();
+    }
+
+    public String shortenLink(String longUrl) {
+        // Generate a unique short link
+        String shortLink = generateShortLink();
+        // Store the mapping between short and long URLs
+        urlMappings.put(shortLink, longUrl);
+        return shortLink;
+    }
+
+    public String expandLink(String shortLink) {
+        // Retrieve the original long URL from the mapping
+        return urlMappings.get(shortLink);
+    }
+
+    private String generateShortLink() {
+        StringBuilder shortLink = new StringBuilder();
+        for (int i = 0; i < SHORT_LINK_LENGTH; i++) {
+            int randomIndex = (int) (Math.random() * BASE62_CHARACTERS.length());
+            shortLink.append(BASE62_CHARACTERS.charAt(randomIndex));
+        }
+        return shortLink.toString();
+    }
+
+    public static void main(String[] args) {
+        LinkShortener linkShortener = new LinkShortener();
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("1. Shorten Link");
+            System.out.println("2. Expand Link");
+            System.out.println("3. Exit");
+            System.out.print("Choose an option: ");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline character
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter the long URL to shorten: ");
+                    String longUrl = scanner.nextLine();
+                    String shortLink = linkShortener.shortenLink(longUrl);
+                    System.out.println("Shortened Link: " + shortLink);
+                    break;
+                case 2:
+                    System.out.print("Enter the short link to expand: ");
+                    String inputShortLink = scanner.nextLine();
+                    String expandedLink = linkShortener.expandLink(inputShortLink);
+                    if (expandedLink != null) {
+                        System.out.println("Expanded Link: " + expandedLink);
+                    } else {
+                        System.out.println("Invalid Short Link");
+                    }
+                    break;
+                case 3:
+                    System.out.println("Exiting Link Shortener. Goodbye!");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please choose a valid option.");
+            }
+        }
+    }
+}
